@@ -1,0 +1,8 @@
+@name keyboard
+@inputs Char:string Clk Clr
+@outputs String:string
+@persist String:string
+@trigger Clk Clr
+
+if (Clk==1 & Char!="") {String=String+Char}
+if (Clr==1) {String=" "}

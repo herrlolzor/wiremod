@@ -1,0 +1,3 @@
+@inputs Range
+@outputs Thrust
+Thrust=100-Range-($Range*5)

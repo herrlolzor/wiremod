@@ -1,0 +1,22 @@
+@name radio beamrider guidance
+@inputs On Data
+@outputs Freq A B C D Center
+@persist T
+@trigger None
+Freqs=table(602,604,606,608)
+if (On==1) {T=T+0.1}
+else {T=0}
+if (round(T)>3) {T=0.5}
+
+Addr=round(T)
+if (Addr==0 & Data==1) {A=1}
+elseif (Addr==0 & Data!=1) {A=0}
+
+if (Addr==1 & Data==2) {B=1}
+elseif (Addr==1 & Data!=2) {B=0}
+
+if (Addr==2 & Data==3) {C=1}
+elseif (Addr==2 & Data!=3) {C=0}
+
+if (Addr==3 & Data==4) {D=1}
+elseif (Addr==3 & Data!=4) {D=0}

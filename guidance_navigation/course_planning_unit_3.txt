@@ -1,0 +1,17 @@
+@name Course Planning Unit 3
+@inputs Target:entity IntDist IntSpeed
+@outputs Solution:vector Diff:vector Time
+@persist T:vector GPS:vector 
+@trigger
+#offboard targetting!
+interval(250) # 4 times/sec
+GPS=entity():pos()
+T=Target:pos()
+if (IntDist<=1) {Dist=GPS:distance(T)}
+else {Dist=IntDist}
+if (IntSpeed<=1000) {Speed1=6000}
+else {Speed1=IntSpeed}
+Vel=Target:vel()
+Time=Dist/Speed1
+Solution=T+(Vel*(Time/4))
+Diff=Solution-T
