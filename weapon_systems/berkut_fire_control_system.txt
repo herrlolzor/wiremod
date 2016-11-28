@@ -19,7 +19,7 @@ GPS=entity():pos()
 Msl=Missile
 MslPos=Msl:pos()
 MslV=Msl:vel()
-MslSpeed=entity():vel():length()
+MslSpeed=MslV:length()
 Distance=MslPos:distance(Target)
 Time=Timer/10
 

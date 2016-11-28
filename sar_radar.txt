@@ -67,5 +67,725 @@ if (Y >= Res) {
     FindMax = D
 }
 #End of code block - repeat this for a total of 16 copies
+#####
+
+#Start of repeating code block
+if (World==1) {
+    rangerIgnoreWorld(0)
+    rangerHitWater(1) }
+else {
+    rangerIgnoreWorld(1)
+    rangerHitWater(0) }
+    
+rangerDefaultZero(1) 
+XO = (X * Inc - 1) / Zoom
+YO = (Y * Inc - 1) / Zoom
+R = ranger(Range, XO, YO)
+Eid=R:entity():id()
+Pos=R:position()
+D = R:distance()
+#if (D < FindMin) {FindMin = D}
+if (D > FindMax) {FindMax = D}
+if (X < 32 & Y < 32) {
+    G=(D/FindMax) * 255
+    if (Eid==0) {LCD:writeCell(X + Y * 32, G)}
+    else {LCD:writeCell(X + Y * 32, 50000)
+        NewStr="."+toString(Eid)
+        FindStr=toString(Eid)
+        RefMem=IDMem:concat(".")
+        New=RefMem:find(FindStr)==0
+    if (New==1) {
+        RefMem2=RefMem+NewStr    
+        IDMem:pushNumber(Eid)
+        Mem[Eid,vector]=Pos
+        Time[Eid,number]=curtime()
+        }
+    else {Time[Eid,number]=curtime()
+        Mem[Eid,vector]=Pos}
+    }
+}
+LID=Eid
+X++
+if (X >= Res) {X = -1, Y++}
+if (Y >= Res) {
+    Y = -1
+    MinDepth = FindMin
+    MaxDepth = FindMax
+    FindMin = D
+    FindMax = D
+}
+#End of code block - repeat this for a total of 16 copies
+#####
+
+#Start of repeating code block
+if (World==1) {
+    rangerIgnoreWorld(0)
+    rangerHitWater(1) }
+else {
+    rangerIgnoreWorld(1)
+    rangerHitWater(0) }
+    
+rangerDefaultZero(1) 
+XO = (X * Inc - 1) / Zoom
+YO = (Y * Inc - 1) / Zoom
+R = ranger(Range, XO, YO)
+Eid=R:entity():id()
+Pos=R:position()
+D = R:distance()
+#if (D < FindMin) {FindMin = D}
+if (D > FindMax) {FindMax = D}
+if (X < 32 & Y < 32) {
+    G=(D/FindMax) * 255
+    if (Eid==0) {LCD:writeCell(X + Y * 32, G)}
+    else {LCD:writeCell(X + Y * 32, 50000)
+        NewStr="."+toString(Eid)
+        FindStr=toString(Eid)
+        RefMem=IDMem:concat(".")
+        New=RefMem:find(FindStr)==0
+    if (New==1) {
+        RefMem2=RefMem+NewStr    
+        IDMem:pushNumber(Eid)
+        Mem[Eid,vector]=Pos
+        Time[Eid,number]=curtime()
+        }
+    else {Time[Eid,number]=curtime()
+        Mem[Eid,vector]=Pos}
+    }
+}
+LID=Eid
+X++
+if (X >= Res) {X = -1, Y++}
+if (Y >= Res) {
+    Y = -1
+    MinDepth = FindMin
+    MaxDepth = FindMax
+    FindMin = D
+    FindMax = D
+}
+#End of code block - repeat this for a total of 16 copies
+#####
+
+#Start of repeating code block
+if (World==1) {
+    rangerIgnoreWorld(0)
+    rangerHitWater(1) }
+else {
+    rangerIgnoreWorld(1)
+    rangerHitWater(0) }
+    
+rangerDefaultZero(1) 
+XO = (X * Inc - 1) / Zoom
+YO = (Y * Inc - 1) / Zoom
+R = ranger(Range, XO, YO)
+Eid=R:entity():id()
+Pos=R:position()
+D = R:distance()
+#if (D < FindMin) {FindMin = D}
+if (D > FindMax) {FindMax = D}
+if (X < 32 & Y < 32) {
+    G=(D/FindMax) * 255
+    if (Eid==0) {LCD:writeCell(X + Y * 32, G)}
+    else {LCD:writeCell(X + Y * 32, 50000)
+        NewStr="."+toString(Eid)
+        FindStr=toString(Eid)
+        RefMem=IDMem:concat(".")
+        New=RefMem:find(FindStr)==0
+    if (New==1) {
+        RefMem2=RefMem+NewStr    
+        IDMem:pushNumber(Eid)
+        Mem[Eid,vector]=Pos
+        Time[Eid,number]=curtime()
+        }
+    else {Time[Eid,number]=curtime()
+        Mem[Eid,vector]=Pos}
+    }
+}
+LID=Eid
+X++
+if (X >= Res) {X = -1, Y++}
+if (Y >= Res) {
+    Y = -1
+    MinDepth = FindMin
+    MaxDepth = FindMax
+    FindMin = D
+    FindMax = D
+}
+#End of code block - repeat this for a total of 16 copies
+#####
+
+#Start of repeating code block
+if (World==1) {
+    rangerIgnoreWorld(0)
+    rangerHitWater(1) }
+else {
+    rangerIgnoreWorld(1)
+    rangerHitWater(0) }
+    
+rangerDefaultZero(1) 
+XO = (X * Inc - 1) / Zoom
+YO = (Y * Inc - 1) / Zoom
+R = ranger(Range, XO, YO)
+Eid=R:entity():id()
+Pos=R:position()
+D = R:distance()
+#if (D < FindMin) {FindMin = D}
+if (D > FindMax) {FindMax = D}
+if (X < 32 & Y < 32) {
+    G=(D/FindMax) * 255
+    if (Eid==0) {LCD:writeCell(X + Y * 32, G)}
+    else {LCD:writeCell(X + Y * 32, 50000)
+        NewStr="."+toString(Eid)
+        FindStr=toString(Eid)
+        RefMem=IDMem:concat(".")
+        New=RefMem:find(FindStr)==0
+    if (New==1) {
+        RefMem2=RefMem+NewStr    
+        IDMem:pushNumber(Eid)
+        Mem[Eid,vector]=Pos
+        Time[Eid,number]=curtime()
+        }
+    else {Time[Eid,number]=curtime()
+        Mem[Eid,vector]=Pos}
+    }
+}
+LID=Eid
+X++
+if (X >= Res) {X = -1, Y++}
+if (Y >= Res) {
+    Y = -1
+    MinDepth = FindMin
+    MaxDepth = FindMax
+    FindMin = D
+    FindMax = D
+}
+#End of code block - repeat this for a total of 16 copies
+#####
+
+#Start of repeating code block
+if (World==1) {
+    rangerIgnoreWorld(0)
+    rangerHitWater(1) }
+else {
+    rangerIgnoreWorld(1)
+    rangerHitWater(0) }
+    
+rangerDefaultZero(1) 
+XO = (X * Inc - 1) / Zoom
+YO = (Y * Inc - 1) / Zoom
+R = ranger(Range, XO, YO)
+Eid=R:entity():id()
+Pos=R:position()
+D = R:distance()
+#if (D < FindMin) {FindMin = D}
+if (D > FindMax) {FindMax = D}
+if (X < 32 & Y < 32) {
+    G=(D/FindMax) * 255
+    if (Eid==0) {LCD:writeCell(X + Y * 32, G)}
+    else {LCD:writeCell(X + Y * 32, 50000)
+        NewStr="."+toString(Eid)
+        FindStr=toString(Eid)
+        RefMem=IDMem:concat(".")
+        New=RefMem:find(FindStr)==0
+    if (New==1) {
+        RefMem2=RefMem+NewStr    
+        IDMem:pushNumber(Eid)
+        Mem[Eid,vector]=Pos
+        Time[Eid,number]=curtime()
+        }
+    else {Time[Eid,number]=curtime()
+        Mem[Eid,vector]=Pos}
+    }
+}
+LID=Eid
+X++
+if (X >= Res) {X = -1, Y++}
+if (Y >= Res) {
+    Y = -1
+    MinDepth = FindMin
+    MaxDepth = FindMax
+    FindMin = D
+    FindMax = D
+}
+#End of code block - repeat this for a total of 16 copies
+#####
+
+#Start of repeating code block
+if (World==1) {
+    rangerIgnoreWorld(0)
+    rangerHitWater(1) }
+else {
+    rangerIgnoreWorld(1)
+    rangerHitWater(0) }
+    
+rangerDefaultZero(1) 
+XO = (X * Inc - 1) / Zoom
+YO = (Y * Inc - 1) / Zoom
+R = ranger(Range, XO, YO)
+Eid=R:entity():id()
+Pos=R:position()
+D = R:distance()
+#if (D < FindMin) {FindMin = D}
+if (D > FindMax) {FindMax = D}
+if (X < 32 & Y < 32) {
+    G=(D/FindMax) * 255
+    if (Eid==0) {LCD:writeCell(X + Y * 32, G)}
+    else {LCD:writeCell(X + Y * 32, 50000)
+        NewStr="."+toString(Eid)
+        FindStr=toString(Eid)
+        RefMem=IDMem:concat(".")
+        New=RefMem:find(FindStr)==0
+    if (New==1) {
+        RefMem2=RefMem+NewStr    
+        IDMem:pushNumber(Eid)
+        Mem[Eid,vector]=Pos
+        Time[Eid,number]=curtime()
+        }
+    else {Time[Eid,number]=curtime()
+        Mem[Eid,vector]=Pos}
+    }
+}
+LID=Eid
+X++
+if (X >= Res) {X = -1, Y++}
+if (Y >= Res) {
+    Y = -1
+    MinDepth = FindMin
+    MaxDepth = FindMax
+    FindMin = D
+    FindMax = D
+}
+#End of code block - repeat this for a total of 16 copies
+#####
+
+#Start of repeating code block
+if (World==1) {
+    rangerIgnoreWorld(0)
+    rangerHitWater(1) }
+else {
+    rangerIgnoreWorld(1)
+    rangerHitWater(0) }
+    
+rangerDefaultZero(1) 
+XO = (X * Inc - 1) / Zoom
+YO = (Y * Inc - 1) / Zoom
+R = ranger(Range, XO, YO)
+Eid=R:entity():id()
+Pos=R:position()
+D = R:distance()
+#if (D < FindMin) {FindMin = D}
+if (D > FindMax) {FindMax = D}
+if (X < 32 & Y < 32) {
+    G=(D/FindMax) * 255
+    if (Eid==0) {LCD:writeCell(X + Y * 32, G)}
+    else {LCD:writeCell(X + Y * 32, 50000)
+        NewStr="."+toString(Eid)
+        FindStr=toString(Eid)
+        RefMem=IDMem:concat(".")
+        New=RefMem:find(FindStr)==0
+    if (New==1) {
+        RefMem2=RefMem+NewStr    
+        IDMem:pushNumber(Eid)
+        Mem[Eid,vector]=Pos
+        Time[Eid,number]=curtime()
+        }
+    else {Time[Eid,number]=curtime()
+        Mem[Eid,vector]=Pos}
+    }
+}
+LID=Eid
+X++
+if (X >= Res) {X = -1, Y++}
+if (Y >= Res) {
+    Y = -1
+    MinDepth = FindMin
+    MaxDepth = FindMax
+    FindMin = D
+    FindMax = D
+}
+#End of code block - repeat this for a total of 16 copies
+#####
+
+#Start of repeating code block
+if (World==1) {
+    rangerIgnoreWorld(0)
+    rangerHitWater(1) }
+else {
+    rangerIgnoreWorld(1)
+    rangerHitWater(0) }
+    
+rangerDefaultZero(1) 
+XO = (X * Inc - 1) / Zoom
+YO = (Y * Inc - 1) / Zoom
+R = ranger(Range, XO, YO)
+Eid=R:entity():id()
+Pos=R:position()
+D = R:distance()
+#if (D < FindMin) {FindMin = D}
+if (D > FindMax) {FindMax = D}
+if (X < 32 & Y < 32) {
+    G=(D/FindMax) * 255
+    if (Eid==0) {LCD:writeCell(X + Y * 32, G)}
+    else {LCD:writeCell(X + Y * 32, 50000)
+        NewStr="."+toString(Eid)
+        FindStr=toString(Eid)
+        RefMem=IDMem:concat(".")
+        New=RefMem:find(FindStr)==0
+    if (New==1) {
+        RefMem2=RefMem+NewStr    
+        IDMem:pushNumber(Eid)
+        Mem[Eid,vector]=Pos
+        Time[Eid,number]=curtime()
+        }
+    else {Time[Eid,number]=curtime()
+        Mem[Eid,vector]=Pos}
+    }
+}
+LID=Eid
+X++
+if (X >= Res) {X = -1, Y++}
+if (Y >= Res) {
+    Y = -1
+    MinDepth = FindMin
+    MaxDepth = FindMax
+    FindMin = D
+    FindMax = D
+}
+#End of code block - repeat this for a total of 16 copies
+#####
+
+#Start of repeating code block
+if (World==1) {
+    rangerIgnoreWorld(0)
+    rangerHitWater(1) }
+else {
+    rangerIgnoreWorld(1)
+    rangerHitWater(0) }
+    
+rangerDefaultZero(1) 
+XO = (X * Inc - 1) / Zoom
+YO = (Y * Inc - 1) / Zoom
+R = ranger(Range, XO, YO)
+Eid=R:entity():id()
+Pos=R:position()
+D = R:distance()
+#if (D < FindMin) {FindMin = D}
+if (D > FindMax) {FindMax = D}
+if (X < 32 & Y < 32) {
+    G=(D/FindMax) * 255
+    if (Eid==0) {LCD:writeCell(X + Y * 32, G)}
+    else {LCD:writeCell(X + Y * 32, 50000)
+        NewStr="."+toString(Eid)
+        FindStr=toString(Eid)
+        RefMem=IDMem:concat(".")
+        New=RefMem:find(FindStr)==0
+    if (New==1) {
+        RefMem2=RefMem+NewStr    
+        IDMem:pushNumber(Eid)
+        Mem[Eid,vector]=Pos
+        Time[Eid,number]=curtime()
+        }
+    else {Time[Eid,number]=curtime()
+        Mem[Eid,vector]=Pos}
+    }
+}
+LID=Eid
+X++
+if (X >= Res) {X = -1, Y++}
+if (Y >= Res) {
+    Y = -1
+    MinDepth = FindMin
+    MaxDepth = FindMax
+    FindMin = D
+    FindMax = D
+}
+#End of code block - repeat this for a total of 16 copies
+#####
+
+#Start of repeating code block
+if (World==1) {
+    rangerIgnoreWorld(0)
+    rangerHitWater(1) }
+else {
+    rangerIgnoreWorld(1)
+    rangerHitWater(0) }
+    
+rangerDefaultZero(1) 
+XO = (X * Inc - 1) / Zoom
+YO = (Y * Inc - 1) / Zoom
+R = ranger(Range, XO, YO)
+Eid=R:entity():id()
+Pos=R:position()
+D = R:distance()
+#if (D < FindMin) {FindMin = D}
+if (D > FindMax) {FindMax = D}
+if (X < 32 & Y < 32) {
+    G=(D/FindMax) * 255
+    if (Eid==0) {LCD:writeCell(X + Y * 32, G)}
+    else {LCD:writeCell(X + Y * 32, 50000)
+        NewStr="."+toString(Eid)
+        FindStr=toString(Eid)
+        RefMem=IDMem:concat(".")
+        New=RefMem:find(FindStr)==0
+    if (New==1) {
+        RefMem2=RefMem+NewStr    
+        IDMem:pushNumber(Eid)
+        Mem[Eid,vector]=Pos
+        Time[Eid,number]=curtime()
+        }
+    else {Time[Eid,number]=curtime()
+        Mem[Eid,vector]=Pos}
+    }
+}
+LID=Eid
+X++
+if (X >= Res) {X = -1, Y++}
+if (Y >= Res) {
+    Y = -1
+    MinDepth = FindMin
+    MaxDepth = FindMax
+    FindMin = D
+    FindMax = D
+}
+#End of code block - repeat this for a total of 16 copies
+#####
+
+#Start of repeating code block
+if (World==1) {
+    rangerIgnoreWorld(0)
+    rangerHitWater(1) }
+else {
+    rangerIgnoreWorld(1)
+    rangerHitWater(0) }
+    
+rangerDefaultZero(1) 
+XO = (X * Inc - 1) / Zoom
+YO = (Y * Inc - 1) / Zoom
+R = ranger(Range, XO, YO)
+Eid=R:entity():id()
+Pos=R:position()
+D = R:distance()
+#if (D < FindMin) {FindMin = D}
+if (D > FindMax) {FindMax = D}
+if (X < 32 & Y < 32) {
+    G=(D/FindMax) * 255
+    if (Eid==0) {LCD:writeCell(X + Y * 32, G)}
+    else {LCD:writeCell(X + Y * 32, 50000)
+        NewStr="."+toString(Eid)
+        FindStr=toString(Eid)
+        RefMem=IDMem:concat(".")
+        New=RefMem:find(FindStr)==0
+    if (New==1) {
+        RefMem2=RefMem+NewStr    
+        IDMem:pushNumber(Eid)
+        Mem[Eid,vector]=Pos
+        Time[Eid,number]=curtime()
+        }
+    else {Time[Eid,number]=curtime()
+        Mem[Eid,vector]=Pos}
+    }
+}
+LID=Eid
+X++
+if (X >= Res) {X = -1, Y++}
+if (Y >= Res) {
+    Y = -1
+    MinDepth = FindMin
+    MaxDepth = FindMax
+    FindMin = D
+    FindMax = D
+}
+#End of code block - repeat this for a total of 16 copies
+#####
+
+#Start of repeating code block
+if (World==1) {
+    rangerIgnoreWorld(0)
+    rangerHitWater(1) }
+else {
+    rangerIgnoreWorld(1)
+    rangerHitWater(0) }
+    
+rangerDefaultZero(1) 
+XO = (X * Inc - 1) / Zoom
+YO = (Y * Inc - 1) / Zoom
+R = ranger(Range, XO, YO)
+Eid=R:entity():id()
+Pos=R:position()
+D = R:distance()
+#if (D < FindMin) {FindMin = D}
+if (D > FindMax) {FindMax = D}
+if (X < 32 & Y < 32) {
+    G=(D/FindMax) * 255
+    if (Eid==0) {LCD:writeCell(X + Y * 32, G)}
+    else {LCD:writeCell(X + Y * 32, 50000)
+        NewStr="."+toString(Eid)
+        FindStr=toString(Eid)
+        RefMem=IDMem:concat(".")
+        New=RefMem:find(FindStr)==0
+    if (New==1) {
+        RefMem2=RefMem+NewStr    
+        IDMem:pushNumber(Eid)
+        Mem[Eid,vector]=Pos
+        Time[Eid,number]=curtime()
+        }
+    else {Time[Eid,number]=curtime()
+        Mem[Eid,vector]=Pos}
+    }
+}
+LID=Eid
+X++
+if (X >= Res) {X = -1, Y++}
+if (Y >= Res) {
+    Y = -1
+    MinDepth = FindMin
+    MaxDepth = FindMax
+    FindMin = D
+    FindMax = D
+}
+#End of code block - repeat this for a total of 16 copies
+#####
+
+#Start of repeating code block
+if (World==1) {
+    rangerIgnoreWorld(0)
+    rangerHitWater(1) }
+else {
+    rangerIgnoreWorld(1)
+    rangerHitWater(0) }
+    
+rangerDefaultZero(1) 
+XO = (X * Inc - 1) / Zoom
+YO = (Y * Inc - 1) / Zoom
+R = ranger(Range, XO, YO)
+Eid=R:entity():id()
+Pos=R:position()
+D = R:distance()
+#if (D < FindMin) {FindMin = D}
+if (D > FindMax) {FindMax = D}
+if (X < 32 & Y < 32) {
+    G=(D/FindMax) * 255
+    if (Eid==0) {LCD:writeCell(X + Y * 32, G)}
+    else {LCD:writeCell(X + Y * 32, 50000)
+        NewStr="."+toString(Eid)
+        FindStr=toString(Eid)
+        RefMem=IDMem:concat(".")
+        New=RefMem:find(FindStr)==0
+    if (New==1) {
+        RefMem2=RefMem+NewStr    
+        IDMem:pushNumber(Eid)
+        Mem[Eid,vector]=Pos
+        Time[Eid,number]=curtime()
+        }
+    else {Time[Eid,number]=curtime()
+        Mem[Eid,vector]=Pos}
+    }
+}
+LID=Eid
+X++
+if (X >= Res) {X = -1, Y++}
+if (Y >= Res) {
+    Y = -1
+    MinDepth = FindMin
+    MaxDepth = FindMax
+    FindMin = D
+    FindMax = D
+}
+#End of code block - repeat this for a total of 16 copies
+#####
+
+#Start of repeating code block
+if (World==1) {
+    rangerIgnoreWorld(0)
+    rangerHitWater(1) }
+else {
+    rangerIgnoreWorld(1)
+    rangerHitWater(0) }
+    
+rangerDefaultZero(1) 
+XO = (X * Inc - 1) / Zoom
+YO = (Y * Inc - 1) / Zoom
+R = ranger(Range, XO, YO)
+Eid=R:entity():id()
+Pos=R:position()
+D = R:distance()
+#if (D < FindMin) {FindMin = D}
+if (D > FindMax) {FindMax = D}
+if (X < 32 & Y < 32) {
+    G=(D/FindMax) * 255
+    if (Eid==0) {LCD:writeCell(X + Y * 32, G)}
+    else {LCD:writeCell(X + Y * 32, 50000)
+        NewStr="."+toString(Eid)
+        FindStr=toString(Eid)
+        RefMem=IDMem:concat(".")
+        New=RefMem:find(FindStr)==0
+    if (New==1) {
+        RefMem2=RefMem+NewStr    
+        IDMem:pushNumber(Eid)
+        Mem[Eid,vector]=Pos
+        Time[Eid,number]=curtime()
+        }
+    else {Time[Eid,number]=curtime()
+        Mem[Eid,vector]=Pos}
+    }
+}
+LID=Eid
+X++
+if (X >= Res) {X = -1, Y++}
+if (Y >= Res) {
+    Y = -1
+    MinDepth = FindMin
+    MaxDepth = FindMax
+    FindMin = D
+    FindMax = D
+}
+#End of code block - repeat this for a total of 16 copies
+#####
+
+#Start of repeating code block
+if (World==1) {
+    rangerIgnoreWorld(0)
+    rangerHitWater(1) }
+else {
+    rangerIgnoreWorld(1)
+    rangerHitWater(0) }
+    
+rangerDefaultZero(1) 
+XO = (X * Inc - 1) / Zoom
+YO = (Y * Inc - 1) / Zoom
+R = ranger(Range, XO, YO)
+Eid=R:entity():id()
+Pos=R:position()
+D = R:distance()
+#if (D < FindMin) {FindMin = D}
+if (D > FindMax) {FindMax = D}
+if (X < 32 & Y < 32) {
+    G=(D/FindMax) * 255
+    if (Eid==0) {LCD:writeCell(X + Y * 32, G)}
+    else {LCD:writeCell(X + Y * 32, 50000)
+        NewStr="."+toString(Eid)
+        FindStr=toString(Eid)
+        RefMem=IDMem:concat(".")
+        New=RefMem:find(FindStr)==0
+    if (New==1) {
+        RefMem2=RefMem+NewStr    
+        IDMem:pushNumber(Eid)
+        Mem[Eid,vector]=Pos
+        Time[Eid,number]=curtime()
+        }
+    else {Time[Eid,number]=curtime()
+        Mem[Eid,vector]=Pos}
+    }
+}
+LID=Eid
+X++
+if (X >= Res) {X = -1, Y++}
+if (Y >= Res) {
+    Y = -1
+    MinDepth = FindMin
+    MaxDepth = FindMax
+    FindMin = D
+    FindMax = D
+}
+#End of code block - repeat this for a total of 16 copies
 
 }

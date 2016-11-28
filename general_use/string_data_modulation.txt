@@ -1,5 +1,5 @@
 @name string data modulation
-@inputs X Y Z
+@inputs A B C D E F G H
 @outputs Data:string
 @persist TX:string TY:string TZ:string Compress:string
 @persist X1:string Y1:string Z1:string

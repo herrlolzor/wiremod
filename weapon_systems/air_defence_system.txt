@@ -9,7 +9,7 @@ Hit2=TF["2",number]
 Target1=TF["1_Ent",entity]
 Target2=TF["2_Ent",entity]
 TNE=Target2==noentity()
-if (TNE==1) {Target2=Target1)
+if (TNE==1) {Target2=Target1}
 
 interval(100)
 while (Online!=1) {reset()}

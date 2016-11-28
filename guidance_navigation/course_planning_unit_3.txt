@@ -4,14 +4,13 @@
 @persist T:vector GPS:vector 
 @trigger
 #offboard targetting!
-interval(250) # 4 times/sec
+interval(100) # 10 times/sec
 GPS=entity():pos()
 T=Target:pos()
 if (IntDist<=1) {Dist=GPS:distance(T)}
 else {Dist=IntDist}
-if (IntSpeed<=1000) {Speed1=6000}
+if (IntSpeed<=1000) {Speed1=4000}
 else {Speed1=IntSpeed}
-Vel=Target:vel()
 Time=Dist/Speed1
-Solution=T+(Vel*(Time/4))
+Solution=T+(Target:vel()*(Time/10))
 Diff=Solution-T
