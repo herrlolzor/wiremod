@@ -1,0 +1,110 @@
+@name TLAM
+@inputs Launch Radar:wirelink LaserPos:vector Clk Gl
+@outputs GroundTargetSet Dist Speed Altitude Search Lock RollT PitchT YawT
+@outputs GPS:vector Mul Go Vec:vector TBearing TElev TargetPos:vector Arm Detonate
+@persist Targetpos:vector Dist AltDiff Map:string PatrolAngle GroundTarget:vector GroundTargetSet
+@persist AltMod MinAlt PatrolDist AltCutoff SetSpeed Gl TerminalDist
+@trigger Clk
+
+if (first()) { #set variables
+    Map = map()
+    AltMod = 8
+    MinAlt= 3000
+    SetSpeed = 3000
+    #Gl = entity():pos():z()
+    TerminalDist = MinAlt*3
+}
+
+if (Clk & ~Clk) {
+    GroundTarget = LaserPos
+    GroundTargetSet = 1}
+
+Target = Radar["1_Ent",entity]:pos()
+if (Launch) {I=10}
+else {I=250}
+interval(I)
+E=entity()
+GPS=E:pos()
+Gx=GPS:x()
+Py=GPS:y()
+Sz=GPS:z()
+Speed = E:vel():length()
+Mode = 0 #Mode 0: Inertial Only, Mode 1: Active Seeking
+
+if (Launch & GroundTargetSet) {
+    Go = Launch
+    Mul = (SetSpeed/Speed)*3
+    
+    if (Go & Dist<(TerminalDist*2)) {
+        Search=1
+        RadarTarget = Radar["1_Ent",entity]
+        ContactID = RadarTarget:id()
+        Lock = ContactID!=0
+        }
+    else {
+        Search=0
+        RadarTarget = noentity()
+        ContactID = 0
+        Lock = 0
+    }
+    
+    if (!Mode & GroundTargetSet & !Lock) {
+        Tx = GroundTarget:x()
+        Ty = GroundTarget:y()
+        Tz = GroundTarget:z()
+    }
+    elseif (Mode & Lock) {
+        Tx = RadarTarget:pos():x()
+        Ty = RadarTarget:pos():y()
+        Tz = RadarTarget:pos():z()
+    }
+    TargetPos = vec(Tx,Ty,Tz)
+    Dist=GPS:distance(vec(Tx,Ty,Tz))
+    HDist=GPS:distance(vec(Tx,Ty,GPS:z()))
+    
+    if (Dist<(TerminalDist*2)) {Altitude = Sz-Tz}
+    else {Altitude = Sz-Gl}
+    AltDiff = Altitude-MinAlt
+
+    GroundTargetSet = Lock | (GroundTarget!=vec(0,0,0))
+    TBearing = E:bearing(TargetPos)
+    TElev = E:elevation(TargetPos)
+
+    X = (Gx-Tx)*50
+    Y = (Py-Ty)*50
+    if (Dist<TerminalDist) {Z = (Sz-Tz)*2}
+    else {Z=AltDiff*AltMod}
+
+    Vec=vec(X,Y,Z)
+    
+    RollV = E:angVel():roll() 
+    PitchV = E:angVel():pitch() 
+    YawV = E:angVel():yaw() 
+    AltPitch = (AltDiff/15000) * 80
+    if (Go) {
+        RollT = RollV + (E:angles():roll()*4)
+        YawT = YawV*-1 + (TBearing*-50)
+        if (Dist<TerminalDist) {
+            PitchT = PitchV + (TElev*50)
+            }
+        else {
+            if (AltDiff< -2000) {PitchT = PitchV + ((E:angles():pitch()+75)*25)}
+            elseif (AltDiff>2000) {PitchT = PitchV + ((E:angles():pitch()-75)*25)}
+            else {PitchT = PitchV + ((E:angles():pitch()-AltPitch)*25)}
+        }
+    }
+    
+    if (Dist<TerminalDist) {Arm=1}
+    else {Arm=0}
+    if (Arm & Dist<500) {Detonate = 1}
+    else {Detonate = 0}
+}
+else { 
+    Mul = 0
+    Go = 0
+    RollT = 0
+    YawT = 0
+    PitchT = 0
+    A = 0
+    Ok = 0
+}

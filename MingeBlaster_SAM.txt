@@ -1,0 +1,55 @@
+@name MingeBlaster SAM
+@inputs Arm Fire Target:entity #Update
+@outputs Ready Self:entity Vector:vector Det A Mul Launch Dist
+@persist MinDist TRAM:vector GPS:vector Time Launch InitAlt DT
+@trigger None
+interval(100)
+#Performance Constants
+MaxTime=250
+Self=entity()
+GPS=Self:pos()
+T=Target:pos()
+
+if (Arm==1) {
+GPS=entity():pos()
+if (Arm==1 & Fire==0 & Launch==0) {InitAlt=GPS:z()
+    MinDist=100000}
+TRAM=T
+
+
+#guidance
+Dist = TRAM:distance(GPS)
+if (MinDist>Dist) {MinDist=Dist
+    Detonate = 0}
+elseif (Time>15 & (Dist>MinDist | Dist<500)) {Detonate = 1}
+AltDiff = GPS:z()-T:z()
+if ((TRAM:x())!=0) {Ready=1}
+else {Ready=0}
+if (Ready==1) {Talt=(TRAM:z())-InitAlt}
+Guid1=GPS-TRAM
+if (Launch==1 & Dist>=10000) {Z=Guid1:z()-(Dist/4)}
+elseif (Dist>5000) {Z=Guid1:z()-(Dist/8)}
+else {Z=Guid1:z()-350}
+Vector=vec((Guid1:x()),(Guid1:y()),Z)
+
+
+
+
+#firing
+if (Ready==1 & Fire==1) {Launch=1}
+if (Launch==1) {Time=Time+1}
+Timer=Time/10
+
+#engines
+if (Time>=1 & Time<=5) {A=1}
+elseif (Time>5) {A=0.2
+    Mul=1}
+else {A=0
+    Mul=0}
+
+#det
+if (Ready==1 & Launch==1 & Timer>=1 & (Time>=MaxTime | Detonate==1)) {Det=1}
+else {Det=0}
+}
+
+#By Baron Von Kekstein

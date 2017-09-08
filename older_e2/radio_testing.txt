@@ -7,5 +7,5 @@
 On=1 
 InFreq=110
 OutFreq=100
-TxWatts=2
+TxWatts=20
 Channel1=1
