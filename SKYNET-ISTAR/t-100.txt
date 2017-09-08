@@ -1,8 +1,8 @@
 @name t-100
-@inputs On Order:string NewOrder Sensor:wirelink MissionCom
+@inputs On Order:string RadioIn Sensor:wirelink MissionCom
 @outputs RadioOut Aimm Acquire Aimvec:vector Fire Lock Next Data:string Vector:vector TgtID
 @persist Mem:array RadioOut Reg1 Lock Engaging R1 ID Vec:vector
-@trigger NewOrder
+@trigger RadioIn
 
 
 interval(100)
@@ -13,6 +13,10 @@ interval(100)
 if (Next==1) {Next=0}
 
 #DATA AND AIMING
+    Roger=104
+    Misscomp=1337
+    NewOrder=9292
+    EngagingCode=666
     KillID=Mem[1,number]
     Vector=Mem[2,vector]
     GPS=entity():pos()
@@ -48,6 +52,7 @@ if (Next==1) {Next=0}
         Lock=0}
     else {Engaging=0
         Lock=0}
+    if (entity(TgtID) == noentity()) {RadioOut=Misscomp}
 
 #AIMING PROGRAM
 	if (On==1) {Aimm=1
@@ -67,9 +72,6 @@ if (Next==1) {Next=0}
 		Aimvec=Safeaimvec}
 
 #RADIO
-	Roger=104
-	Misscomp=1337
-	EngagingCode=666
 	if (Engaging==1) {RadioOut=EngagingCode}
 	elseif (Tgtdead==1) {RadioOut=Misscomp}
 	elseif (MissionCom==1) {RadioOut=Misscomp}
@@ -90,24 +92,12 @@ if (Next==1) {Next=0}
 	}
 
 #ORDER DECODING
-	if (NewOrder==1) {Mem[3,string]=Order
-		#DATA EXTRACT
+	if (RadioIn==NewOrder) {Mem[3,string]=Order
 		Data=Mem[3,string]
-		#Find Markers
-		PA=Data:find("K")
-		PB=Data:find("X")
-		PC=Data:find("Y")
-		PD=Data:find("Z")
-		#Split X Y and Z
-		T1=Data:sub(1,PA-1)
-		T2=Data:sub((PA+1),(PB-1))
-		T3=Data:sub((PB+1),(PC-1))
-		T4=Data:sub((PC+1),(PD-1))
-		T5=Data:sub(PD+1)
-		#destringify
-		TL=T1:toNumber()
-		ID=T2:toNumber()
-		Vec=vec(T3:toNumber(),T4:toNumber(),T5:toNumber())
+		Ex=Data:explode("|")
+		TL=Ex[1,string]:toNumber()
+		ID=Ex[2,string]:toNumber()
+		Vec=vec(Ex[3,string]:toNumber(),Ex[4,string]:toNumber(),Ex[5,string]:toNumber())
 		Mem[1,number]=ID
 		Mem[2,vector]=Vec
 		RadioOut=Roger}

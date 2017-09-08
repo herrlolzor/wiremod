@@ -1,0 +1,21 @@
+@name altimeter
+@inputs Z1 Z2 Z3
+@outputs Z
+@persist 
+@trigger 
+interval(50)
+if (!Z1 & !Z2) {Z=Z3}
+elseif (!Z1 & !Z3) {Z=Z2}
+elseif (!Z2 & !Z3) {Z=Z1}
+elseif (Z1==0) {
+    if (Z2>Z3) {Z=Z2}
+    elseif (Z3>Z2) {Z=Z3}
+}
+elseif (Z2==0) {
+    if (Z1>Z3) {Z=Z1}
+    elseif (Z3>Z1) {Z=Z3}
+}
+elseif (Z3==0) {
+    if (Z1>Z2) {Z=Z1}
+    elseif (Z2>Z1) {Z=Z2}
+}

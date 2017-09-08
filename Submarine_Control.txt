@@ -1,0 +1,10 @@
+@name Submarine Control
+@inputs Depth Port Starboard Fore Aft
+@outputs ZTarget ZVelocity
+@persist 
+@trigger 
+interval(100)
+GPS = entity():pos()
+SeaLevel = -11825
+ZVelocity = 1
+ZTarget = SeaLevel - Depth

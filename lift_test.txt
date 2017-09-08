@@ -1,0 +1,20 @@
+@name lift test
+@inputs LeftWing:entity RightWing:entity LeftAileron:entity RightAileron:entity
+@outputs V WingForce AilForce Up:vector LV:vector
+@persist 
+@trigger 
+interval(10)
+E = entity()
+V = E:vel():length()
+Up = E:up()
+LV = E:velL()
+
+WingMul = 15
+AilMul = 3
+WingForce = LV:x() * WingMul
+AilForce = LV:x() * AilMul
+
+LeftWing:applyForce( Up * WingForce )
+RightWing:applyForce( Up * WingForce  )
+LeftAileron:applyForce( Up * AilForce )
+RightAileron:applyForce( Up * AilForce )
