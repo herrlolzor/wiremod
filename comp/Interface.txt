@@ -2,7 +2,7 @@
 @inputs Power Key Clk Clr OutString:string Output
 @outputs Char:string Input Command:string ScreenBuffer:array Ack Code
 @persist InputBuffer:array ScreenBuffer:array Command:string Ack Booted Code
-@trigger Key OutString Power
+@trigger Key Output Power
 if (!Power) {reset()
     interval(10)}
 
