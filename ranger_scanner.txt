@@ -1,6 +1,6 @@
 @name ranger scanner
 @inputs On Entity:entity
-@outputs X Y NPC Dir TDist TEnt:entity TPos:vector TID TAlive Lock Search
+@outputs X Y NPC Dir TDist TEnt:entity TPos:vector TID TAlive Lock Search Angle Yaw
 @persist Angle Dir TDir TEnt:entity TPos:vector Lock Search SearchTimer BeginSearch TAlive
 @trigger 
 runOnTick(1)
@@ -65,3 +65,4 @@ if ((TID!=0 & TAlive==0) | SearchTimer>=MaxSearch) {
     TAlive = 0}
     
 }
+Yaw = Angle * 45

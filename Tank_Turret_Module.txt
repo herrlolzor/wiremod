@@ -30,13 +30,13 @@ elseif ( ~Active & Active ) {
     #Gun Stuff
     
     #Elevation (How high the gun aims in degrees)
-    Elevation = 10
+    Elevation = 80
     #Depression (How low the gun aims in degrees)
     Depression = 7.5
     #How far around the gun can left and right in degrees (180 is all the way around, 90 is flush to each side)
     Yaw = 180
     #How fast the gun turns, this is an arbitrary number and must be adjusted to your liking, Higher is faster
-    RotateSpeed = 15
+    RotateSpeed = 50
    
     #Turret Sound     Just replace the sound path with whatever sound you like
     Gun:soundPlay(1,0,"vehicles/tank_turret_loop1.wav")
@@ -75,7 +75,7 @@ elseif ( ~Active & Active ) {
     YawSpd = (Left*-1 + Right)*2*(8-(Shift*7))
     DepressSpd = (Up*-1 + Down)*(1.5-(Shift))
     LocalToGun = ang(DepressSpd,YawSpd,0)
-    Gun:applyAngForce((LocalToGun * 500 - Gun:angVel() * 47) * Inertia) #250, 47
+    Gun:applyAngForce((LocalToGun * 1000 - Gun:angVel() * 47) * Inertia) #250, 47
     
     interval( 35 )
 } elseif (clk("stop-gun-spinning")) {

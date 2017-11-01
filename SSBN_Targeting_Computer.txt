@@ -1,0 +1,10 @@
+@name SSBN Targeting Computer
+@inputs Laser:vector
+@outputs Target:vector Tx Ty Tz
+@persist 
+@trigger 
+
+Target = Laser
+Tx = Target:x()
+Ty = Target:y()
+Tz = Target:z()
