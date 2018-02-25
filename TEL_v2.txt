@@ -1,10 +1,10 @@
 @name TEL v2
-@inputs Erect Launch Target:vector CeilingZ
-@outputs Timer Len MissileWeld Tx Ty Tz MissileArm MissileLaunch Align TELWeld
+@inputs Erect Launch Target:vector
+@outputs Timer Len MissileWeld Tx Ty Tz MissileArm MissileLaunch Align TELWeld TopThrust TopWeld
 @persist Len Timer
 
 interval(100)
-ErectLen = 275
+ErectLen = 250
 Tx=Target:x()
 Ty=Target:y()
 Tz=Target:z()
@@ -17,6 +17,9 @@ else {TELWeld=0}
 
 if (Launch & Len==ErectLen) {
     if (Timer>0) {Timer-=0.1}
+    if (Timer<5) {TopWeld=0} #######
+    if (Timer<5 & Timer>4) {TopThrust=1} ########
+    else {TopThrust=0}
 
     if (Timer<5) {MissileArm=1}
     else {MissileArm=0}
@@ -29,6 +32,8 @@ if (Launch & Len==ErectLen) {
     }
 }
 else {
+    TopWeld=1
+    TopThrust=0
     MissileWeld=1
     Timer=6
     MissileLaunch=0

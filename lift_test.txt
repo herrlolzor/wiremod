@@ -1,20 +1,29 @@
-@name lift test
-@inputs LeftWing:entity RightWing:entity LeftAileron:entity RightAileron:entity
-@outputs V WingForce AilForce Up:vector LV:vector
+@name wing
+@inputs Wing:entity Wing2:entity Wing3:entity Wing4:entity
+@outputs Area V VV:vector LV:vector FrontVel Front:vector AoA LiftForce WingForce
 @persist 
 @trigger 
+# Wing2 optional
 interval(10)
-E = entity()
-V = E:vel():length()
-Up = E:up()
-LV = E:velL()
 
-WingMul = 15
-AilMul = 3
-WingForce = LV:x() * WingMul
-AilForce = LV:x() * AilMul
+WingMul = 6
+PropRotation = 0 # yaw rotation of prop
 
-LeftWing:applyForce( Up * WingForce )
-RightWing:applyForce( Up * WingForce  )
-LeftAileron:applyForce( Up * AilForce )
-RightAileron:applyForce( Up * AilForce )
+Area = sqrt(Wing:boxSize():x()*Wing:boxSize():y())
+LV = Wing:velL()
+
+VV = Wing:pos()+(Wing:vel())
+FrontVel = abs(vec2(LV):rotate(PropRotation):x())
+B = Wing:bearing(VV)
+AoA = Wing:elevation(VV)
+
+if (AoA>=30 | AoA<= -30) {LiftForce=0}
+else {LiftForce = WingMul*sin(AoA*-6)}
+
+WingForce = (FrontVel * WingMul)*LiftForce
+WingForce2 = (FrontVel * (WingMul*4))*LiftForce
+
+Wing:applyForce( Wing:up() * WingForce )
+Wing2:applyForce( Wing2:up() * WingForce )
+Wing3:applyForce( Wing3:up() * WingForce )
+Wing4:applyForce( Wing4:up() * WingForce )

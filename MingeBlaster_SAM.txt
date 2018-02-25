@@ -1,55 +1,67 @@
 @name MingeBlaster SAM
 @inputs Arm Fire Target:entity #Update
-@outputs Ready Self:entity Vector:vector Det A Mul Launch Dist
-@persist MinDist TRAM:vector GPS:vector Time Launch InitAlt DT
+@outputs Ready Self:entity Vector:vector Det A Mul Launch Dist Time IntTime RD Speed
+@persist MinDist TRAM:vector GPS:vector Time Launch InitAlt DT I
 @trigger None
-interval(100)
+if (first()) {I=250}
+interval(I)
 #Performance Constants
-MaxTime=250
+MaxTime=1000
 Self=entity()
 GPS=Self:pos()
 T=Target:pos()
 
 if (Arm==1) {
-GPS=entity():pos()
-if (Arm==1 & Fire==0 & Launch==0) {InitAlt=GPS:z()
-    MinDist=100000}
-TRAM=T
+    if (Arm==1 & Fire==0 & Launch==0) {
+        InitAlt=GPS:z()
+    }
 
-
-#guidance
-Dist = TRAM:distance(GPS)
-if (MinDist>Dist) {MinDist=Dist
-    Detonate = 0}
-elseif (Time>15 & (Dist>MinDist | Dist<500)) {Detonate = 1}
-AltDiff = GPS:z()-T:z()
-if ((TRAM:x())!=0) {Ready=1}
-else {Ready=0}
-if (Ready==1) {Talt=(TRAM:z())-InitAlt}
-Guid1=GPS-TRAM
-if (Launch==1 & Dist>=10000) {Z=Guid1:z()-(Dist/4)}
-elseif (Dist>5000) {Z=Guid1:z()-(Dist/8)}
-else {Z=Guid1:z()-350}
-Vector=vec((Guid1:x()),(Guid1:y()),Z)
-
-
-
-
-#firing
-if (Ready==1 & Fire==1) {Launch=1}
-if (Launch==1) {Time=Time+1}
-Timer=Time/10
-
-#engines
-if (Time>=1 & Time<=5) {A=1}
-elseif (Time>5) {A=0.2
-    Mul=1}
-else {A=0
-    Mul=0}
-
-#det
-if (Ready==1 & Launch==1 & Timer>=1 & (Time>=MaxTime | Detonate==1)) {Det=1}
-else {Det=0}
+    TRAM=T
+    if ((TRAM:x())!=0) {Ready=1}
+    else {Ready=0}
+    
+    #targeting
+    Dist = TRAM:distance(GPS)
+    AltDiff = GPS:z()-T:z()
+    RD = $Dist
+    
+    #firing
+    if (Ready==1 & Fire==1) {Launch=1}    
+    if (Launch) {
+        I = 5
+        Time = Time+1
+        
+        #flight guidance
+        IntDist = GPS:distance(T)
+        Speed = entity():vel():length()
+        if (Speed<=10) {Speed1=4000}
+        else {Speed1=Speed}
+        
+        IntTime = Dist/Speed1
+        Solution = T + (Target:vel()*IntTime)
+        Guidance = (GPS - Solution)*5
+        if (Dist>10000) {VertOffset = vec(0,0,100)}
+        else {VertOffset = vec(0,0,0)}
+        Vector = Guidance - VertOffset
+        
+        #engines
+        if (Time>0 & Time<=20) {A=1}
+        elseif (Time>10) {A=0.1
+            Mul=1}
+        else {A=0
+            Mul=0}
+        
+        #det
+        if (Time>50 & (RD>0 | Dist<50)) {Detonate = 1}
+        if (Ready==1 & Launch==1 & Time>=10 & (Time>=MaxTime | Detonate==1)) {Det=1}
+        else {Det=0}
+    }
+    else {
+        Det = 0
+        A = 0
+        Mul = 0
+    }
 }
+else {reset()}
 
 #By Baron Von Kekstein

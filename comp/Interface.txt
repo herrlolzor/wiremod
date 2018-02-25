@@ -1,13 +1,13 @@
 @name Interface
-@inputs Power Key Clk Clr OutString:string Output
-@outputs Char:string Input Command:string ScreenBuffer:array Ack Code
+@inputs Power Key Clk Clr OutString:string Output 
+@outputs Char:string Input Command:string ScreenBuffer:array Ack Code ResetKb
 @persist InputBuffer:array ScreenBuffer:array Command:string Ack Booted Code
 @trigger Key Output Power
 if (!Power) {reset()
     interval(10)}
 
 if (!Booted) {ScreenBuffer=array("","","","","","","","","","","","","","","","","","")
-    InputBuffer=array(">")
+    InputBuffer=array("> ")
     Booted=1}
 
 
@@ -22,7 +22,7 @@ if (Output) {
     Input=0
     Code=1
 }
-elseif (Clk & Key==10) {
+elseif (Clk & Key==13) {
     #ScreenBuffer:pop()
     ScreenBuffer:pushString(InputBuffer:concat())
     ScreenBuffer:shift()

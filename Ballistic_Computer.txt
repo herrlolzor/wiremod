@@ -6,16 +6,16 @@
 
 TR = 1/1000
 E=entity()
-MS = 150.3
+MS = 165.8
 V = fromUnit("m/s",MS)*0.701
-G = gravity()
+G = 9.83#gravity()
 Gl = E:pos():z()-200
 Yaw = Cannon:angles():yaw()+180
 Pitch = Cannon:angles():pitch()
 Bear = Cannon:bearing(Target)
 
 Dist = (Cannon:pos()-Target):length()
-CalcDist=((V^2)*sin((-2*Pitch)))/G
+CalcDist=fromUnit("m",((MS^2)*sin((-2*Pitch)))/G)
 
 Lateral = -(Bear/90)
 

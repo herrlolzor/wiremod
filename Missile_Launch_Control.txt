@@ -18,6 +18,7 @@ if (Launching) {
     if (Timer<5 & Timer>4) {Align=1}
     else {Align=0}
     
+    if (Timer<=0.3) {MissileLaunch = 1}
     if (Timer==0) {
         MissileWeld = 0
         MissileLaunch = 1

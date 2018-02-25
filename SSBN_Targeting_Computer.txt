@@ -1,4 +1,4 @@
-@name SSBN Targeting Computer
+@name Strategic Targeting Computer
 @inputs TargetChoice Manual Laser:vector
 @outputs Target:vector TargetName:string Tx Ty Tz
 @persist TargetPosTable:table TargetNameTable:table

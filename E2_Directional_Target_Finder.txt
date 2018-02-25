@@ -60,6 +60,7 @@ if (On) {
     Position = Entity:pos()
     Velocity = Entity:vel()
     Angles = Entity:angles()
+    Entity = entity(ID)
     Distance = Mypos:distance(Position)
 }
 else{

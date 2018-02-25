@@ -1,10 +1,16 @@
 @name air defence system
-@inputs Hit1 Hit2 Target1:entity Target2:entity Online Fire Opmode
+@inputs Online Fire Opmode Radar:wirelink
 @outputs Guidance1:vector Guidance2:vector Alarm FireAlarm Fire1 Fire2 
 @outputs Pitch Lateral Mode D1 D2 
 @persist Count Pitch2
 
-TNE = Target2==noentity()
+
+Hit1 = Radar["1",number]
+Hit2 = Radar["2",number]
+Target1 = Radar["1_Ent",entity]
+Target2 = Radar["2_Ent",entity]
+
+TNE = Target1==noentity()
 if (TNE==1) {Target2=Target1}
 
 interval(100)

@@ -1,11 +1,12 @@
-@name MiR18N Hellcat Block 15
+@name MiR18N Hellfish Block 20
 @inputs WeaponBus:wirelink Radar:wirelink LaserPos:vector LIV:vector LIV2:vector LandVec:vector LandHeading Launch Stage RTB
 @inputs Patrol MissionMode AircraftID Wing:entity Mass Reset FlightDeck
-@outputs Mode ArmWeapons GroundTargetSet WeaponsReady Dist Speed Altitude Heading VelHeading Search Lock RadarTarget:entity RollT PitchT YawT AircraftID
-@outputs GPS:vector Mul A Go Ok Vec:vector RadarBearing RadarElev FiringAngle TargetPos:vector Fire Winchester Expended Ops MET FlightStage
-@outputs CorrectLVV:vector CorrectApproach:vector VecCorrect:vector LandPhase GlideSlope ResetCounter Deck
+@outputs Ops I Mode ArmWeapons GroundTargetSet WeaponsReady Dist Speed Altitude Heading VelHeading Search Lock RadarTarget:entity AircraftID
+@outputs GPS:vector Mul A Go Ok Vec:vector RadarBearing RadarElev FiringAngle TargetPos:vector Fire Winchester Expended FlightStage
+@outputs CorrectLVV:vector CorrectApproach:vector VecCorrect:vector LandPhase GlideSlope ResetCounter Deck FBW
+@outputs AltDiff Bearing MissionMode
 @persist Targetpos:vector Dist AltDiff ReleaseDist:array Map:string PatrolAngle GroundTarget:vector GroundTargetSet
-@persist GlideSlope AltMod MinAlt PatrolDist AltCutoff BeginLanding SetSpeed TargetsEngaged MET MaxEngagements LandPhase
+@persist GlideSlope AltMod MinAlt PatrolDist AltCutoff BeginLanding SetSpeed TargetsEngaged MaxEngagements LandPhase FBW
 @trigger None
 
 #[
@@ -64,13 +65,13 @@ AircraftID = AircraftID
 FlightStage = Stage
 ResetCounter = Reset
 Deck = FlightDeck
-if (Launch & !Stage) {I=10}
-elseif (Launch & Stage) {I=50}
+
+if (Launch & Stage==0) {I=200}
+elseif (Launch & Stage==1 & LandPhase) {I=10}
+elseif (Launch & Stage==2) {I=5}
 else {I=250}
 interval(I)
 Ops = ops()
-
-if (Reset) {MET=0}
 
 if (MissionMode>2) {Mode=0}
 else {Mode = Patrol}
@@ -108,9 +109,9 @@ AirSpeed=E:velL():x()
 if (Launch & LandVecSet & Wing!=noentity()) {
     Go = (Stage <= 2)
     ArmWeapons = (!Stage & Go)
+    FBW = 1
     
     if (Stage == 0) { # TARGET RUN
-        MET+=(I/1000)
         Mul = (SetSpeed/Speed)*3
         A=Mul
         LandPhase=0
@@ -219,7 +220,6 @@ if (Launch & LandVecSet & Wing!=noentity()) {
         VecCorrect=vec(0,0,0)
     }
     elseif (Stage == 1) { # RETURN TO BASE / HOLDING PATTERN / INITIAL LANDING VECTOR
-        MET+=(I/1000)
         FiringAngle = 0
         Search = 0
         Winchester = 0
@@ -281,7 +281,6 @@ if (Launch & LandVecSet & Wing!=noentity()) {
         
         }
     elseif (Stage == 2) { # FINAL APPROACH
-        MET+=(I/1000)
         FiringAngle = 0
         Search = 0
         Winchester = 0
@@ -327,46 +326,19 @@ if (Launch & LandVecSet & Wing!=noentity()) {
         YawT = 0
         PitchT = 0
         A = 0
+        FBW = 0
     }
 
     Vec=vec(X,Y,Z)+(VecCorrect*10)
     
-    Angles = E:angles()
-    AngVel = E:angVel()
-    RollV = AngVel:roll() 
-    PitchV = AngVel:pitch() 
-    YawV = AngVel:yaw()
-    AltPitch = (AltDiff/15000) * 80
-    if (Go) {
-        if (Pitch<60 & Pitch> -60) {RollT = RollV + (Angles:roll()*2)}
-        else {RollT=0}
-        if (Pitch<60 & Pitch> -60) {YawT = (YawV*10) + (Bearing*25)}
-        else {YawT=0}
-        if (((MissionMode<=1 & Lock) | MissionMode==2) & Dist<15000 & !Stage) {PitchT = PitchV + (RadarElev*25)}
-        elseif (Stage==1) {PitchT = PitchV + (LIVElev*25)}
-        elseif (Stage==2) {PitchT = (PitchV*4) + ((Angles:pitch()-AltPitch)*25)}
-        else {
-            if (AltDiff< -2000) {PitchT = PitchV + ((Angles:pitch()+75)*25)}
-            elseif (AltDiff>2000) {PitchT = PitchV + ((Angles:pitch()-75)*25)}
-            else {PitchT = PitchV + ((Angles:pitch()-AltPitch)*25)}
-        }
-    }
-    else {
-        RollT = 0
-        PitchT = 0
-        YawT = 0
-        LandPhase = 0
-    }
 }
 else {
     Mul = 0
     Go = 0
-    RollT = 0
-    YawT = 0
     LandPhase = 0
-    PitchT = 0
     A = 0
     Fire = 0
+    FBW = 0
     Ok = 0
 }
 

@@ -4,7 +4,7 @@
 @persist LastScreen:array
 @trigger 
 
-interval(50)
+interval(200)
 
 if (ScreenBuffer:concat()!=LastScreen:concat()) {ClrScrn=1}
 else {ClrScrn=0}

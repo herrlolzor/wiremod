@@ -1,7 +1,7 @@
 @name Clock
 @inputs 
 @outputs Clk ClrScrn
-@persist Time ScrnClk CClk
+@persist Time ScrnClk Clk
 @trigger 
 
 Rate=100
@@ -11,12 +11,9 @@ if (ScrnClk>4) {ClrScrn=1
     ScrnClk=0}
 else {ClrScrn=0}
 
-if (CClk==1) {
-    Clk=1
-    CClk=0}
-else {Clk=0}
+if (Clk==1) {Clk=0}
+else {Clk=1}
 
 
 Time+=1
 ScrnClk+=1
-CClk+=1

@@ -1,8 +1,0 @@
-@name e2 timer
-@inputs On Reset
-@outputs Out
-@persist Count
-interval(50)
-if (Reset==1) {Count=0}
-Count=Count+On/20
-Out=Count

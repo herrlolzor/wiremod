@@ -30,11 +30,11 @@ elseif ( ~Active & Active ) {
     #Gun Stuff
     
     #Elevation (How high the gun aims in degrees)
-    Elevation = 80
+    Elevation = 45
     #Depression (How low the gun aims in degrees)
-    Depression = 7.5
+    Depression = 45
     #How far around the gun can left and right in degrees (180 is all the way around, 90 is flush to each side)
-    Yaw = 180
+    Yaw = 45
     #How fast the gun turns, this is an arbitrary number and must be adjusted to your liking, Higher is faster
     RotateSpeed = 50
    
@@ -69,17 +69,17 @@ elseif ( ~Active & Active ) {
 
     #Ang Force Stuff
     local GunAng = (Gun:pos()):toAngle()
-    local Force = Gun:toWorld(clamp(Gun:toLocal(GunAng),ang(-RotateSpeed),ang(RotateSpeed)))
+    local Force = Gun:toWorld(clamp(Gun:toLocal(GunAng),ang(-RotateSpeed),ang(RotateSpeed)))*100
     local Clamped = clamp(entity():toLocal(Force),ang(Elevation,-Yaw,-1),ang(Depression,Yaw,1))
     #LocalToGun = Gun:toLocal(entity():toWorld(Clamped))
-    YawSpd = (Left*-1 + Right)*2*(8-(Shift*7))
-    DepressSpd = (Up*-1 + Down)*(1.5-(Shift))
+    YawSpd = (Left*-1 + Right)*5*(5-(Shift*4))
+    DepressSpd = (Up*-1 + Down)*(3-(Shift))
     LocalToGun = ang(DepressSpd,YawSpd,0)
     Gun:applyAngForce((LocalToGun * 1000 - Gun:angVel() * 47) * Inertia) #250, 47
     
     interval( 35 )
 } elseif (clk("stop-gun-spinning")) {
-    Gun:applyAngForce(-Gun:angVel() * 30 * Inertia)
+    Gun:applyAngForce(-Gun:angVel() * 200 * Inertia)
     
     if (Gun:angVelVector():length() > 0.1) {
         timer("stop-gun-spinning",100)

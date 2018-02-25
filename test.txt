@@ -1,9 +1,13 @@
-@name test
-@inputs A B
-@outputs Table:array
-@persist Table:array
+@name 
+@inputs 
+@outputs X Y Pitch Roll
+@persist X Y
 @trigger 
-interval(250)
+interval(10)
 
-if (A) {Table[1,number]=1}
-if (B) {Table:remove(1)}
+Ang = entity():angles()
+Pitch = Ang:pitch()
+Roll = Ang:roll()
+#X=toRad(120)
+X = tan(toRad(Roll))/1
+Y = tan(toRad(Pitch+90))/1

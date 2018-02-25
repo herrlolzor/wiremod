@@ -1,9 +1,10 @@
 @name Sorcerer-256 PC
-@inputs Power Clk Command:string Input Ack IO_in_1:array IO_in_2:array
-@outputs Out:string Output IO_out_1:array IO_out_2:array PMode O:string
+@inputs Power Clk Command:string Input Ack IO_in_1:array IO_in_2:array DriveIn:array
+@outputs Program:array Out:string Output IO_out_1:array IO_out_2:array PMode O:string
+@outputs Cmd:string DriveOut:array Reg1 Reg2
 @persist RAM:array Out:string Output Argv:array Program:array PCount PMode Bool O:string
-@persist PrintList PrintListCount Test:array ScrnBuff:array Reg1 Reg2 
-@trigger None#Ack Clk
+@persist PrintList PrintListCount Test:array ScrnBuff:array Reg1 Reg2 LastRes
+@trigger #Clk #Ack
 
 if (Ack==0 & Out!="") {Output=1}
 else {Out=""
@@ -12,7 +13,7 @@ else {Out=""
 RAMSize=256
 if (first()) {for (I=1,RAMSize) {RAM[I,string]=""}}
 if (Power) {
-    if (PMode==0) {runOnTick(1)}
+    if (PMode==1) {interval(100)}
     else {interval(2000)}
     
     if (PrintList) {
@@ -73,8 +74,18 @@ if (Power) {
         if (Arg2=="1") {RAM[Arg4:toNumber(),string] = IO_in_1[Arg3:toNumber(),number]:toString()}
         if (Arg2=="2") {RAM[Arg4:toNumber(),string] = IO_in_2[Arg3:toNumber(),number]:toString()}
     }
+    elseif (Cmd=="wdisk") {
+        DriveOut[Arg2:toNumber(),number]=Arg3:toNumber()
+    }
+    elseif (Cmd=="rdisk") {
+        Reg1 = DriveIn[Arg2:toNumber(),number]
+    }
     elseif (Cmd=="setreg") {
         Reg1 = Arg2:toNumber()
+    }
+    elseif (Cmd=="regmem") {
+        if (Arg2=="1") {RAM[Arg4:toNumber(),string] = Reg1:toString()}
+        if (Arg2=="2") {RAM[Arg4:toNumber(),string] = Reg1:toString()}
     }
     elseif (Cmd=="setmem") {
         RAM[Arg2:toNumber(),string] = Arg3
