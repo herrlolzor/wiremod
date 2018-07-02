@@ -10,7 +10,8 @@
 @outputs Error:vector DistT DistT2 DD R E  #Debugging/Calibration Outputs
 @persist X Y Z P1:vector Position:vector 
 
-runOnTick(1)
+if (On) {runOnTick(1)}
+else {interval(100)}
 EC=1.335
 R=66.567*EC
 Ent=entity()

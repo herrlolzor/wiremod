@@ -1,6 +1,6 @@
 @name missile track projector
 @inputs Calculate Tpos:vector Tvel:vector 
-@outputs Impact:vector ImpactDist Go Done Error TTI ETTI Time Timer Accel:vector IntAcc:vector Inter:vector
+@outputs Impact:vector ImpactDist Go Done Error TTI ETTI Time Timer Accel:vector IntAcc:vector Inter:vector Countdown:string CountMin CountSec
 @persist Vel:vector Acc:vector InputLoaded Go Timer Done Error IntAcc:vector Int
 @trigger Calculate
 
@@ -12,7 +12,9 @@ IntAcc+=Accel
 if (Int==6000) {Int=1
 IntAcc=IntAcc/6000
 Inter=IntAcc}
-
+CountMin = round(TTI/60)
+CountSec = round(TTI%60)
+Countdown = toString(CountMin)+":"+toString(CountSec)
 
 if (Calculate & !Go) {
     ETTI = TTI

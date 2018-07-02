@@ -1,14 +1,16 @@
-@name E2 Directional Target Finder
-@inputs On Index Reset
+@name E2 Steerable Directional Target Finder
+@inputs On Index Reset TPos:vector ConeAngle
 @inputs NPCs Players Props Locators Vehicles ExcludePlayer ExcludePlayerProps
 @outputs Bogeys Entity:entity ID Distance Type:string Model:string Position:vector Velocity:vector 
-@outputs IsPlayer IsNPC IsVehicle
+@outputs IsPlayer IsNPC IsVehicle F:array
 @persist 
-@trigger 
+@trigger None
 
 #Exclude/Allow = blacklist
 #Include/Disallow = whitelist
 #blacklist priority
+if (On) {interval(10)}
+else {interval(500)}
 
 Ind=Index+1
 if (Reset) {reset()}
@@ -32,6 +34,7 @@ if (first()|duped()) {
     findExcludeClass("gmod_tool")
     findExcludeClass("pist_weapon")
     findExcludeClass("ammo")
+    findExcludeClass("weapon")
     findExcludeModel("weapon")
 
 }
@@ -41,7 +44,8 @@ if (On) {
     Owner=owner()
     Mypos=E:pos()
     Len=30000
-    Deg=30
+    if (ConeAngle==0) {Deg=30}
+    else {Deg=ConeAngle}
     MyAng=E:angles()
     
     if (ExcludePlayer) {findExcludePlayer(Owner)}
@@ -72,7 +76,9 @@ if (On) {
     if (Locators) {findAllowClass("gmod_wire_locator")}
     else {findExcludeClass("gmod_wire_locator")}
     
-    findInCone(Mypos, E:up(), Len, Deg)
+    if (TPos==vec()) {Dir = E:up()}
+    else {Dir = (TPos-E:pos()):normalized()}
+    findInCone(Mypos, Dir, Len, Deg)
     findSortByDistance(Mypos)
     F = findToArray()
     Bogeys = F:count()

@@ -1,10 +1,12 @@
 @name wing
-@inputs Wing:entity Wing2:entity Wing3:entity Wing4:entity
+@inputs On Wing:entity Wing2:entity Wing3:entity Wing4:entity
 @outputs Area V VV:vector LV:vector FrontVel Front:vector AoA LiftForce WingForce
 @persist 
 @trigger 
 # Wing2 optional
-interval(10)
+if (On) {I=10}
+else {I=500}
+interval(I)
 
 WingMul = 6
 PropRotation = 0 # yaw rotation of prop

@@ -47,7 +47,7 @@ if (Launched & !Detonated) {
     Y=Pos:y() - OffsetVec:y()
     if (Dist>(InitDist*0.9)) {AltMod = Dist, Phase = 1}
     elseif (Dist>(InitDist*0.4)) {AltMod = Dist/3, Phase = 2}
-    else {AltMod = 0, Phase = 3}
+    else {AltMod = FuzeHeight+(Dist/100), Phase = 3}
     Z=Pos:z() - T:z() - AltMod
     Vector = vec(X,Y,Z)
     
@@ -58,7 +58,7 @@ if (Launched & !Detonated) {
     else {Z = T:z()}
     Alt = entity():pos():z()-Z
     
-    if (Phase == 2) {Warhead["Arm",number] = 1}
+    if (Phase >= 2) {Warhead["Arm",number] = 1}
     
     if (Phase == 3) {
         if (Airburst & (Alt+entity():vel():z()/10)<=FuzeHeight) {Warhead["Detonate",number] = 1, Detonated = 1}

@@ -2,10 +2,14 @@
 @inputs On E:entity ReadAddr Reset
 @outputs ID Next Contacts C OutputID OutputEnt:entity OutputPos:vector ReadEnt:entity ReadID ReadPos:vector Targets:array
 @persist Targets:array HaveEnt:array Positions:array C Next
-@trigger 
+@trigger None
 interval(50)
 
-if (Reset) {reset()}
+if (Reset) {
+    C=0
+    Targets = array()
+    HaveEnt = array()
+    Positions = array()}
 
 if (On) {
     ID = E:id()
@@ -17,8 +21,9 @@ if (On) {
     elseif ((E:isPlayer() | E:isNPC()) & E:health()>0) {
         Positions[ID,vector] = E:pos()
     }
-        
-    if (entity(Targets[C,number]):health()<=0 | !(E:isPlayer() | E:isNPC())) {
+    
+    CheckEnt = entity(Targets[C,number])
+    if (CheckEnt:health()<=0 | (!CheckEnt:isPlayer() & !CheckEnt:isNPC())) {
         HaveEnt[Targets[C,number],number]=0
         Positions:removeVector(Targets[C,number])
         Targets:removeNumber(C)
@@ -35,7 +40,7 @@ if (On) {
     ReadPos = Positions[ReadID,vector]
     
     C+=1
-    if (C>128) {C=1}
+    if (C>32) {C=0}
     if (Next) {Next=0}
     elseif (!Next) {Next=1}
 }

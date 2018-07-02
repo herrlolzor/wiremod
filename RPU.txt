@@ -1,30 +1,41 @@
 @name RPU
-@inputs Target:vector Base:entity CS:wirelink
-@outputs X Y X2 Y2 Bear Alt Dist ScreenReset
-@persist GPS:vector T
-interval(100)
-BZ = Base:pos():z()
+@inputs Target:entity CS:wirelink
+@outputs X Y X2 Y2
+@persist GPS:vector ZeroAlt
+@trigger
+interval(500)
 GPS=entity():pos()
+T=Target:pos()
+ZeroAlt=GPS:z()
+TX=T:x()
+TY=T:y()
+TZ=T:z()
 Gx=GPS:x()
 Py=GPS:y()
-Z=Target:z()
-Bear = Base:bearing(Target) -180
-Dist = entity():pos():distance(Target)
-Alt = Z-BZ
-
-X=(cos(Bear) * Dist) / 30000
-Y=(sin(Bear) * Dist) /30000
-X2=(Dist / 30000) -1
-Y2=((Z-BZ) /10000) -0.5
-
-T+=1
-if (T==5) {
-    ScreenReset=1
-    T=0
-}
-else {ScreenReset=0}
-
-CS:writeString("TARGET",0,1,999)
-CS:writeString("DIST "+round(Dist),0,2,999)
-CS:writeString("ALT "+ round(Alt),0,3,999)
-CS:writeString("TARGET",0,4,999)
+Speed=Target:vel():length()
+Distance=GPS:distance(T)
+Altitude=TZ-ZeroAlt
+Calc=Distance^2 - Altitude^2
+Range=sqrt(Calc)
+X= ((Gx-TX) / 40000)
+Y= ((Py-TY) /40000)
+X2= (Range / 40000)-1
+Y2= (Altitude / 20000)-1
+Bearing=entity():bearing(T)
+ID=Target:id()
+Type=Target:model()
+A1=toString(Range)
+B1=toString(Speed)
+C1=toString(Bearing)
+D1=toString(ID)
+#F1=toString(Data3)
+A="Range   "+A1
+B="Speed   "+B1
+C="Bearing "+C1
+D="ENTID   "+D1
+E="Type    "+Type
+CS:writeString(A,1,0)
+CS:writeString(B,1,2)
+CS:writeString(C,1,4)
+CS:writeString(D,1,6)
+CS:writeString(E,1,8)
